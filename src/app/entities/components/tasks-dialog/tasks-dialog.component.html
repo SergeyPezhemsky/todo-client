@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Список задач пользоватаеля "{{data.person.name}}"</h1>
+
+<div mat-dialog-content  class="content" [formGroup]="fromGroup">
+  <div class="actions">
+    <div class="action-block">
+      <span class="text">Добавить задачу</span>
+      <dx-button  *ngIf="showMore"
+                  icon="minus"
+                  (onClick)="changeView()">
+      </dx-button>
+      <dx-button  *ngIf="!showMore"
+                  icon="plus"
+                  (onClick)="changeView()">
+      </dx-button>
+    </div>
+    <div class="action-block" *ngIf="showMore">
+      <span class="text">Название: </span>
+      <dx-text-box width="68%"
+                   class="action-text-box"
+                   placeholder="Введите название"
+                   formControlName="name">
+      </dx-text-box>
+    </div>
+
+    <div class="action-block" *ngIf="showMore">
+      <span class="text">Время действия: </span>
+      <dx-text-box width="68%"
+                   class="action-text-box"
+                   placeholder="Введите время действия"
+                   formControlName="timeOfEnd"></dx-text-box>
+    </div>
+
+    <div class="action-block" *ngIf="showMore">
+      <span class="text">Приоритет: </span>
+      <dx-text-box width="68%"
+                   class="action-text-box"
+                   placeholder="Введите приоритет"
+                   formControlName="priority"></dx-text-box>
+    </div>
+
+    <div class="action-block" *ngIf="showMore">
+      <dx-button  [disabled]="!fromGroup.valid"
+                  class="action-button"
+                  (onClick)="addTask()">
+        Добавить
+      </dx-button>
+    </div>
+  </div>
+  <div *ngFor="let task of data.person.tasks">
+    <div class="action-block">
+      <div>
+        <dx-button (onClick)="deleteTask()"
+                   icon="trash"
+                   width="50px"
+                   height="50px">
+        </dx-button>
+        <span class="name-text">{{task.name}}</span>
+      </div>
+
+      <span class="text">{{'Время действия: '+ task.timeOfEnd}}</span>
+      <span class="text">{{'Приоритет: ' + task.priority}}</span>
+    </div>
+  </div>
+</div>
