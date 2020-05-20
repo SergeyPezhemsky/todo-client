@@ -24,11 +24,35 @@ export class TodoService {
       });
   }
 
-  public savePeople(person: Person): void {
+  public savePeople(person: any): void {
     this._api.post('', person)
       .toPromise()
       .then((people: Person[]) => {
         this.people$$.next(people);
     });
+  }
+
+  public deletePerson(id: string): void {
+    this._api.delete(id)
+      .toPromise()
+      .then((people: Person[]) => {
+      this.people$$.next(people);
+    });
+  }
+
+  public addTask(peopleId: string, task: any): void {
+    this._api.put('addItem/' + peopleId, task)
+      .toPromise()
+      .then((people: Person[]) => {
+        this.people$$.next(people);
+      });
+  }
+
+  public deleteTask(peopleId: string, taskId: string): void {
+    this._api.get('deleteToDOItem/' + peopleId + '/' + taskId)
+      .toPromise()
+      .then((people: Person[]) => {
+        this.people$$.next(people);
+      });
   }
 }

@@ -38,13 +38,14 @@ export class AppComponent implements OnInit{
       {
         name: this.fromGroup.value.name,
         birthDate: this.fromGroup.value.birthDate,
-        id: null,
-        tasks: null,
       }
     );
+    this.fromGroup.value.name = '';
+    this.fromGroup.setValue({name: ''});
   }
 
-  public deletePerson(): void {
+  public deletePerson(person: Person): void {
+    this.todoService.deletePerson(person.id);
   }
 
   public openTasksDialog(person: Person): void {

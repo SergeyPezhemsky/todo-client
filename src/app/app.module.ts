@@ -7,6 +7,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { TasksDialogComponent } from './entities/components/tasks-dialog/tasks-dialog.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import {ApiService} from './entities/services/api.service';
+import {TodoService} from './entities/services/todo.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,10 +21,14 @@ import {MatDialogModule} from '@angular/material/dialog';
     DxTextBoxModule,
     DxButtonModule,
     ReactiveFormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    HttpClientModule
   ],
   providers: [
-    TasksDialogComponent
+    TasksDialogComponent,
+    ApiService,
+    TodoService,
+    HttpClient,
   ],
   bootstrap: [AppComponent],
   exports: [
