@@ -46,6 +46,11 @@
       </dx-button>
     </div>
   </div>
+  <div class="sort" *ngIf="data.person.tasks.length !== 0">
+    <dx-button icon="arrowup"
+               (onClick)="sort()"
+               [class.sort-button]="this.sortLess"></dx-button>
+  </div>
   <div *ngFor="let task of data.person.tasks">
     <div class="action-block" *ngIf="data.person.tasks.length !== 0">
       <div>

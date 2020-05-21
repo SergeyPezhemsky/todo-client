@@ -16,6 +16,7 @@ export class TasksDialogComponent implements OnInit {
 
   public fromGroup: FormGroup;
   public showMore = true;
+  public sortLess = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -31,8 +32,12 @@ export class TasksDialogComponent implements OnInit {
       priority: this._fb.control('', Validators.required),
     });
     this.todoService.people$
-      .subscribe((people: Person[]) => this.data.person =
-        people.filter((data: Person) => data.id === this.data.person.id)[0]);
+      .subscribe((people: Person[]) => {
+        this.data.person = people.filter((data: Person) => data.id === this.data.person.id)[0];
+        this.data.person.tasks.sort((a: Tasks, b: Tasks) => {
+          return a.name < b.name ? -1 : 1;
+        });
+      });
   }
 
   public addTask(): void {
@@ -52,4 +57,10 @@ export class TasksDialogComponent implements OnInit {
     this.todoService.deleteTask(this.data.person.id, task.id);
   }
 
+  public sort(): void {
+    this.data.person.tasks.sort((a: Tasks, b: Tasks) => {
+        return (a.name < b.name) && this.sortLess ? 1 : -1;
+    });
+    this.sortLess = !this.sortLess;
+  }
 }

@@ -40,3 +40,11 @@
   font-family: 'Roboto', sans-serif;
   font-size: 25px;
 }
+.sort {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+}
+.sort-button{
+  transform: rotate(180deg);
+}
