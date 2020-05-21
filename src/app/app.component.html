@@ -44,25 +44,43 @@
                   (onClick)="changeView()">
       </dx-button>
     </div>
+    <dx-data-grid [dataSource]="people"
+                  [rowAlternationEnabled]="true"
+                  showBorders = "true"
+                  (onRowUpdated)="changePerson($event)"
+                  class="action-text-box">
+      <dxo-editing mode="cell"
+                   [allowUpdating]="true">
+      </dxo-editing>
+      <dxi-column width="50px"
+                  dataField="id"
+                  caption=""
+                  cellTemplate="deleteColumn">
+      </dxi-column>
+      <dxi-column caption="Имя"
+                  dataField="name">
+      </dxi-column>
+      <dxi-column caption="Дата рождения"
+                  dataField="birthDate">
+      </dxi-column>
+      <dxi-column width="50px"
+                  dataField="id"
+                  caption=""
+                  cellTemplate="taskColumn">
+      </dxi-column>
 
-    <div *ngFor="let person of people">
-        <div class="action-block" *ngIf="showPeople">
-          <div>
-            <dx-button (onClick)="deletePerson(person)"
-                       icon="trash"
-                       width="50px"
-                       height="50px">
-            </dx-button>
-            <span class="name-text">{{person.name}}</span>
-          </div>
+      <div *dxTemplate="let data of 'deleteColumn'">
+        <dx-button (onClick)="deletePerson(data)"
+                    icon="trash">
+        </dx-button>
+      </div>
 
-          <span class="text">{{person.birthDate + 'г.'}}</span>
-          <dx-button icon="event"
-                     width="50px"
-                     height="50px"
-                     (onClick)="openTasksDialog(person)">
-          </dx-button>
-        </div>
-    </div>
+      <div *dxTemplate="let data of 'taskColumn'">
+        <dx-button (onClick)="openTasksDialog(data)"
+                   icon="event">
+        </dx-button>
+      </div>
+
+    </dx-data-grid>
   </div>
 </div>

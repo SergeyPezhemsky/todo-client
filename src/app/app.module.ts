@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {DxButtonModule, DxTextBoxModule} from 'devextreme-angular';
+import {DxButtonModule, DxDataGridModule, DxTextBoxModule} from 'devextreme-angular';
 import {ReactiveFormsModule} from '@angular/forms';
 import { TasksDialogComponent } from './entities/components/tasks-dialog/tasks-dialog.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +22,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     DxButtonModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    DxDataGridModule
   ],
   providers: [
     TasksDialogComponent,

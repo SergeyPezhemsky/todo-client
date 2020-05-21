@@ -55,4 +55,10 @@ export class TodoService {
         this.people$$.next(people);
       });
   }
+
+  public editPeople(person: any): void {
+    this._api.put(person.id, person)
+      .toPromise()
+      .then();
+  }
 }

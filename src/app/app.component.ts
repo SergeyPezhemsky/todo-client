@@ -44,11 +44,12 @@ export class AppComponent implements OnInit{
     this.fromGroup.setValue({name: ''});
   }
 
-  public deletePerson(person: Person): void {
-    this.todoService.deletePerson(person.id);
+  public deletePerson(event: any): void {
+    this.todoService.deletePerson(event.data.id);
   }
 
-  public openTasksDialog(person: Person): void {
+  public openTasksDialog(event: any): void {
+    const person = this.people.find((per: Person) => per.id === event.data.id);
     this.dialogRef.open(TasksDialogComponent, {
       data: {
         person
@@ -58,5 +59,9 @@ export class AppComponent implements OnInit{
 
   public changeView(): void {
     this.showPeople = !this.showPeople;
+  }
+
+  public changePerson(event: any): void {
+    this.todoService.editPeople(event.data);
   }
 }
